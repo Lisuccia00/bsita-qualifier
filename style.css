@@ -7,6 +7,11 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+a{
+    text-decoration: none;
+    color:white;
+}
+
 #logoBG{
     position: fixed;
     z-index: -1;
@@ -49,6 +54,7 @@
     margin-left: 20px;
     display: flex;
 }
+
 
 .container{
     margin-left: 10px;
