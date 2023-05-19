@@ -7,7 +7,6 @@
     scrollbar-width: none;  /* Firefox */
 }
 
-
 #logoBG{
     position: fixed;
     z-index: -1;
@@ -16,6 +15,7 @@
     right: -300px;
     opacity: .1;
 }
+
 .green{
     color:var(--green)
 }
