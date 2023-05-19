@@ -54,6 +54,11 @@ function populate(ID, pfp, name, perc, miss, points, map_id){
         var row = document.createElement('tr')
         var IDcell = document.createElement('td')
         IDcell.classList.add("center")
+        if(i < 3){
+            IDcell.classList.add("green")
+        }else if(i > 3){
+            IDcell.classList.add("red")
+        }
         var namecell = document.createElement('td')
         namecell.classList.add("name")
         var pfpcell = document.createElement('td')

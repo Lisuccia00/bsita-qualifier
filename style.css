@@ -6,10 +6,12 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
-#green{
+
+.green{
     color:var(--green)
 }
-#red{
+
+.red{
     color:var(--red)
 }
 ::-webkit-scrollbar {
