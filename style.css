@@ -15,10 +15,14 @@
 ::-webkit-scrollbar {
     display: none;
 }
-
+.pfp{
+    clip-path:circle();
+    width: 30px;
+}
 #logoimg{
     width: 60px;
     height:60px;
+    
 }
 
 .navbar{
@@ -26,6 +30,7 @@
     top:0;
     width:100%;
     background-color: #252525;
+    z-index: 1;
 }
 
 .content{
@@ -57,7 +62,6 @@ table{
     border-collapse: collapse;
     background-color: #252525;
     border-radius: 10px;
-    overflow: hidden;
 }
 
 body{
@@ -71,17 +75,34 @@ th, td{
     text-align: left;
     padding: 10px;
 }
+
+td img{
+    vertical-align: middle;
+    overflow: hidden;
+}
+
 th{
     background-color: var(--red);
 }
+
 .first{
     border-top-left-radius: 10px;
 }
+
 .last{
     border-top-right-radius: 10px;
+}
+.center{
+    text-align: center;
 }
 @media screen and (max-width: 620px) {
     .content h2{
         font-size: 1.4rem;
+    }
+    .mobileHide{
+        display: none;
+    }
+    .lastMobile{
+        border-top-right-radius: 10px;
     }
 }
