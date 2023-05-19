@@ -7,6 +7,15 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+
+#logoBG{
+    position: fixed;
+    z-index: -1;
+    height: 1000px;
+    bottom:-400px;
+    right: -300px;
+    opacity: .1;
+}
 .green{
     color:var(--green)
 }
@@ -106,5 +115,13 @@ th{
     }
     .lastMobile{
         border-top-right-radius: 10px;
+    }
+    #logoBG{
+        position: fixed;
+        z-index: -1;
+        height: 600px;
+        bottom:-200px;
+        right: -200px;
+        opacity: .1;
     }
 }
