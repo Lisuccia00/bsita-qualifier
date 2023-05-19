@@ -5,6 +5,7 @@ async function getData(){
         var map = map_id[i]
         var responseurl = 'https://corsproxy.io/?' + 'https://scoresaber.com/api/leaderboard/by-id/' + map + '/scores?countries=it&page=1'
         var pizziurl = 'https://corsproxy.io/?' + 'https://scoresaber.com/api/leaderboard/by-id/' + map + '/scores?countries=us&search=sionpizzi'
+        var zoomurl = 'https://corsproxy.io/?' + 'https://scoresaber.com/api/leaderboard/by-id/' + map + '/scores?countries=us&search=xoomies'
         var mapdetailsurl = 'https://corsproxy.io/?' + 'https://scoresaber.com/api/leaderboard/by-id/' + map + '/info'
         var response = await fetch(responseurl)
         var map_details = await fetch(mapdetailsurl)
@@ -14,6 +15,14 @@ async function getData(){
             var pizzi = await pizziscore.json()
             pizzi = pizzi.scores
             pizzi.forEach(element => {
+                scores.push(element)
+            });
+        }
+        var zoomscore = await fetch(zoomurl)
+        if(zoomscore.ok){
+            var zoom = await zoomscore.json()
+            zoom = zoom.scores
+            zoom.forEach(element => {
                 scores.push(element)
             });
         }
