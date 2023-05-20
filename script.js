@@ -1,4 +1,4 @@
-var map_id = ["520163", "520247", "517385", "511498", "531963", "529093", "446433", "406385", "515782", "226550", "38016", "354669", "70185", "100024", "114296"]
+var map_id = ["544408", "66733", "555936", "532992", "557955", "555606", "546669"]
 
 async function getData(){
     for(var i = 0; i < map_id.length; i++){
@@ -9,55 +9,58 @@ async function getData(){
         var mapdetailsurl = 'https://corsproxy.io/?' + 'https://scoresaber.com/api/leaderboard/by-id/' + map + '/info'
         var response = await fetch(responseurl)
         var map_details = await fetch(mapdetailsurl)
-        var {scores} = await response.json()
-        var pizziscore = await fetch(pizziurl)
-        if(pizziscore.ok){
-            var pizzi = await pizziscore.json()
-            pizzi = pizzi.scores
-            pizzi.forEach(element => {
-                scores.push(element)
-            });
-        }
-        var zoomscore = await fetch(zoomurl)
-        if(zoomscore.ok){
-            var zoom = await zoomscore.json()
-            zoom = zoom.scores
-            zoom.forEach(element => {
-                scores.push(element)
-            });
-        }
-        scores.sort((a,b) => (a.baseScore > b.baseScore) ? -1:1)
-        map_details = await map_details.json()
-        var {maxScore} = map_details
-        var songName = map_details.songName + ' - '+ map_details.songAuthorName
-        createNewTable(songName, map)
-        ID = []
-        var rank = []
-        var pfpUrl = []
-        var name = []
-        var perc = []
-        var miss = []
-        var totalpoints = []
-        for(var j = 0; j < scores.length; j++){
-            var points
-            if (j + 1 < 3){
-                points = 1000
-            }else if(j + 1 == 3){
-                points = 100
-            }else if(j + 1 == 4){
-                points = 10
-            }else{
-                points = 1
+        if(response.status != 404){
+            
+            var {scores} = await response.json()
+            var pizziscore = await fetch(pizziurl)
+            if(pizziscore.status != 404){
+                var pizzi = await pizziscore.json()
+                pizzi = pizzi.scores
+                pizzi.forEach(element => {
+                    scores.push(element)
+                });
             }
-            ID[j] = scores[j].leaderboardPlayerInfo.id
-            rank[j] = j + 1
-            pfpUrl[j] = scores[j].leaderboardPlayerInfo.profilePicture
-            name[j] = scores[j].leaderboardPlayerInfo.name
-            perc[j] = ((scores[j].baseScore / maxScore)* 100).toFixed(2)
-            miss[j] = scores[j].missedNotes
-            totalpoints[j] = points
+            var zoomscore = await fetch(zoomurl)
+            if(zoomscore.status != 404){
+                var zoom = await zoomscore.json()
+                zoom = zoom.scores
+                zoom.forEach(element => {
+                    scores.push(element)
+                });
+            }
+            scores.sort((a,b) => (a.baseScore > b.baseScore) ? -1:1)
+            map_details = await map_details.json()
+            var {maxScore} = map_details
+            var songName = map_details.songName + ' - '+ map_details.songAuthorName
+            createNewTable(songName, map)
+            var ID = []
+            var rank = []
+            var pfpUrl = []
+            var name = []
+            var perc = []
+            var miss = []
+            var totalpoints = []
+            for(var j = 0; j < scores.length; j++){
+                var points
+                if (j + 1 < 3){
+                    points = 1000
+                }else if(j + 1 == 3){
+                    points = 100
+                }else if(j + 1 == 4){
+                    points = 10
+                }else{
+                    points = 1
+                }
+                ID[j] = scores[j].leaderboardPlayerInfo.id
+                rank[j] = j + 1
+                pfpUrl[j] = scores[j].leaderboardPlayerInfo.profilePicture
+                name[j] = scores[j].leaderboardPlayerInfo.name
+                perc[j] = ((scores[j].baseScore / maxScore)* 100).toFixed(2)
+                miss[j] = scores[j].missedNotes
+                totalpoints[j] = points
+            }
+            populate(ID,rank,  pfpUrl ,  name, perc, miss, totalpoints, map)
         }
-        populate(ID,rank,  pfpUrl ,  name, perc, miss, totalpoints, map)
     }
 }
 
@@ -73,11 +76,13 @@ function populate(id, rank, pfp, name, perc, miss, points, map_id){
         var row = document.createElement('tr')
         var rankcell = document.createElement('td')
         rankcell.classList.add("center")
+        
         if(i < 3){
             rankcell.classList.add("green")
         }else if(i > 3){
             rankcell.classList.add("red")
         }
+
         var namecell = document.createElement('td')
         namecell.classList.add("name")
         var nameLink = document.createElement('a')
