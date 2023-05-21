@@ -1,6 +1,7 @@
 var map_id = ["544408", "66733", "555936", "532992", "557955", "555606", "546669"]
 
 async function getData(){
+    var finalStandings = new Map()
     for(var i = 0; i < map_id.length; i++){
         var map = map_id[i]
         var responseurl = 'https://corsproxy.io/?' + 'https://scoresaber.com/api/leaderboard/by-id/' + map + '/scores?countries=it&page=1'
@@ -42,11 +43,11 @@ async function getData(){
             var totalpoints = []
             for(var j = 0; j < scores.length; j++){
                 var points
-                if (j + 1 < 3){
+                if (j + 1 < 4){
                     points = 1000
-                }else if(j + 1 == 3){
-                    points = 100
                 }else if(j + 1 == 4){
+                    points = 100
+                }else if(j + 1 == 5){
                     points = 10
                 }else{
                     points = 1
@@ -56,12 +57,22 @@ async function getData(){
                 pfpUrl[j] = scores[j].leaderboardPlayerInfo.profilePicture
                 name[j] = scores[j].leaderboardPlayerInfo.name
                 perc[j] = ((scores[j].baseScore / maxScore)* 100).toFixed(2)
-                miss[j] = scores[j].missedNotes
+                miss[j] = scores[j].missedNotes + scores[j].badCuts
                 totalpoints[j] = points
+                if (finalStandings.has(name[j])) {
+                    const currentValue = finalStandings.get(name[j]);
+                    finalStandings.set(name[j], currentValue + points);
+                } 
+                else {
+                    finalStandings.set(name[j], points);
+                }
+
             }
             populate(ID,rank,  pfpUrl ,  name, perc, miss, totalpoints, map)
         }
     }
+    const sortedArray = Array.from(finalStandings).sort((a, b) => b[1] - a[1])
+    console.log(sortedArray)
 }
 
 function createNewTable(songname, id){
@@ -77,9 +88,9 @@ function populate(id, rank, pfp, name, perc, miss, points, map_id){
         var rankcell = document.createElement('td')
         rankcell.classList.add("center")
         
-        if(i < 3){
+        if(i < 4){
             rankcell.classList.add("green")
-        }else if(i > 3){
+        }else if(i > 4){
             rankcell.classList.add("red")
         }
 
