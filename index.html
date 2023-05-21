@@ -8,14 +8,21 @@
         <script src="script.js"></script>
         <meta name="theme-color" content="#252525" />
         <link rel="icon" href="bsitaicon.png">
+        <script src="https://kit.fontawesome.com/865c0cfb4a.js" crossorigin="anonymous"></script>
     </head>
     <body onload="getData()">
-        <div class="navbar">
-            <div class="content">
-                <h2><span class="green">BSITA</span> Qualifiers <span class="red"> Scores</span></h2>
-                <img src="bsitaicon.png" id="logoimg">
-            </div>
-        </div>
+        <nav class="navbar">
+            <ul>
+                <li class="logo">
+                    <h2><span class="green">BSITA</span> Qualifiers <span class="red"> Scores</span></h2>
+                    <img src="bsitaicon.png" id="logoimg">
+                </li>
+                <li class="mobile"><a onclick="Hamburger()"><i class="fa-solid fa-bars icon"></i></a></li>
+                <li class="menus"><a onclick= "Show('overall'), Hide('maps'), Hamburger()">Overall</a></li>
+                <li class="menus"><a onclick= "Show('maps'), Hide('overall'), Hamburger()">Single Maps</a></li>
+            <ul>
+            </nav>
+        <div class="loader" id="loader"><img src="bsitaicon.png"></div>
         <div class="container" id="container">
         </div>
         <img src="bsitaicon.png" id="logoBG">

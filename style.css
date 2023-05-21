@@ -7,6 +7,31 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+.mobile{
+    display:none;
+}
+
+.loader{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50px, -50px);
+}
+
+.loader img{
+    width:100px;
+    animation: spin 1s;
+    animation-iteration-count: infinite;
+}
+
+.hidden{
+    display: none;
+}
+
+.animate{
+    animation: appear .5s;
+}
+
 a{
     text-decoration: none;
     color:white;
@@ -31,14 +56,15 @@ a{
 ::-webkit-scrollbar {
     display: none;
 }
+
 .pfp{
     clip-path:circle();
     width: 30px;
 }
+
 #logoimg{
     width: 60px;
     height:60px;
-    
 }
 
 .navbar{
@@ -47,14 +73,38 @@ a{
     width:100%;
     background-color: #252525;
     z-index: 1;
+    transition: all .3s;
 }
 
-.content{
+.logo{
+    margin-left: 10px;
+    flex: 1;
     align-items: center;
-    margin-left: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    user-select: none;
+    padding:0;
+}
+
+ul{
+    margin: 0;
+    padding:0;
+    align-items: center;
     display: flex;
 }
 
+li{
+    list-style-type: none;
+    padding: 1rem;
+}
+
+.menus:hover{
+    background-color: var(--green);
+}
+
+.menus > a{
+    display: block ;
+}
 
 .container{
     margin-left: 10px;
@@ -113,16 +163,59 @@ th{
 .center{
     text-align: center;
 }
+
+@keyframes appear{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes spin{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+
+
 @media screen and (max-width: 620px) {
-    .content h2{
+
+    .menus{
+        display: none;
+        width:100%;
+        text-align: center;
+    }
+
+    .icon{
+        font-size: 1.7rem;
+    }
+
+    .mobile{
+        display: block;
+    }
+
+    .navbar ul{
+        flex-wrap: wrap;
+    }
+
+    h2{
         font-size: 1.4rem;
     }
+
     .mobileHide{
         display: none;
     }
+
     .lastMobile{
         border-top-right-radius: 10px;
     }
+
     #logoBG{
         position: fixed;
         z-index: -1;
@@ -130,5 +223,9 @@ th{
         bottom:-200px;
         right: -200px;
         opacity: .1;
+    }
+
+    .active{
+        display:block;
     }
 }
