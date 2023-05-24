@@ -45,11 +45,11 @@ async function getData(){
             var totalpoints = []
             for(var j = 0; j < scores.length; j++){
                 var points
-                if (j + 1 < 4){
+                if (j < 4){
                     points = 1000
-                }else if(j + 1 == 4){
+                }else if(j == 4){
                     points = 100
-                }else if(j + 1 == 5){
+                }else if(j == 5){
                     points = 10
                 }else{
                     points = 1
