@@ -32,6 +32,7 @@ async function getData(){
                 });
             }
             scores.sort((a,b) => (a.baseScore > b.baseScore) ? -1:1)
+            scores = scores.filter(score => score.leaderboardPlayerInfo.name != "Alexto1301")
             map_details = await map_details.json()
             var {maxScore} = map_details
             var songName = map_details.songName + ' - '+ map_details.songAuthorName
